@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Vendor\VendorController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Frontend\FrontendController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +45,13 @@ Route::middleware('auth','role:admin')->group(function(){
     // admin category
     Route::group(['prefix' => 'admin/category'], function(){
         Route::get('/add',[CategoryController::class,'index'])->name('add.category');
+        Route::post('/store',[CategoryController::class,'store'])->name('store.category');
+        Route::get('/show',[CategoryController::class,'show'])->name('show.category');
+    });
+    Route::group(['prefix' => 'admin/subcategory'], function(){
+        Route::get('/add',[SubCategoryController::class,'index'])->name('add.subcategory');
+        Route::post('/store',[SubCategoryController::class,'store'])->name('store.subcategory');
+        Route::get('/show',[SubCategoryController::class,'show'])->name('show.subcategory');
     });
 });
 

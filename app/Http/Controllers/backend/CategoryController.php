@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
+use Image;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -36,7 +39,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = new Category;        
+        if($request->cat_image){
+            $image = $request->file('cat_image');
+            $customName = rand().'.'.$image->getClientOriginalExtension();
+            $location = public_path('uploads/category/'.$customName);
+            Image::make($image)->resize(120,120)->save($location);
+            $category->cat_image = $customName;
+        }
+        $category->cat_name = $request->cat_name;
+        $category->cat_slug = Str::slug($request->cat_name);
+        $category->save();
+        return back()->with('successmessage','Category Added Successfully');
     }
 
     /**
@@ -45,9 +59,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $categories = Category::all();
+        
+        return view('admin.pages.category.manage', compact('categories'));
     }
 
     /**

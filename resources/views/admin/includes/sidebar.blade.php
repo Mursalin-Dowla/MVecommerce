@@ -10,7 +10,7 @@
         </div>
     </div>
     <!--navigation-->
-    <ul class="metismenu" id="menu">
+    <ul class="metismenu" id="menu">      
         <li>
             <a href="javascript:;" >
                 <div class="parent-icon"><i class='bx bx-home-circle'></i>
@@ -27,7 +27,7 @@
             <ul>
                 <li> <a href="{{route('add.category')}}"><i class="bx bx-right-arrow-alt"></i>Add Category</a>
                 </li>
-                <li> <a href="app-chat-box.html"><i class="bx bx-right-arrow-alt"></i>Manage Category</a>
+                <li> <a href="{{route('show.category')}}"><i class="bx bx-right-arrow-alt"></i>Manage Category</a>
                 </li>
             </ul>
         </li>
