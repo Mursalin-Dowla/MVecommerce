@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
+use Image;
 
 class AdminController extends Controller
 {
@@ -28,8 +30,25 @@ class AdminController extends Controller
    }
    public function updateprofile(Request $request){
      $findUser = User::find(Auth::user()->id);
-     $findUser->name = $request->name;
+     if($request->pic){
+          if(File::exists(public_path("backend/assets/admin/".$findUser->pic))){
+               File::delete(public_path("backend/assets/admin/".$findUser->pic));
+               $image = $request->file('pic');
+               $customName = rand().".".$image->getClientOriginalExtension();
+               $location = public_path("backend/assets/admin/".$customName);
+               Image::make($image)->resize(300, 200)->save($location);
+               $findUser->pic = $customName;
+          }
+          else{
+               $image = $request->file('pic');
+               $customName = rand().".".$image->getClientOriginalExtension();
+               $location = public_path("backend/assets/admin/".$customName);
+               Image::make($image)->resize(300, 200)->save($location);
+               $findUser->pic = $customName;
+          }
+     }
      $findUser->email = $request->email;
+     $findUser->username = $request->username;
      $findUser->phone = $request->phone;
      $findUser->address = $request->address;
      $findUser->update();

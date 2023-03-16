@@ -59,14 +59,14 @@
             <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{route('admin.updateprofile')}}" method="post" >   
+                        <form action="{{route('admin.updateprofile')}}" method="post" enctype="multipart/form-data">   
                             @csrf                    
                         <div class="row mb-3">
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Full Name</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" value="{{$adminData->name}}" />
+                                <input type="text" name="name" class="form-control" value="{{$adminData->name}}" />
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -74,7 +74,7 @@
                                 <h6 class="mb-0">User Name</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="text" name="name" class="form-control" value="{{$adminData->username}}" />
+                                <input type="text" name="username" class="form-control" value="{{$adminData->username}}" />
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -108,7 +108,7 @@
                             </div>
                             <img class="w-25 border" height="150px"  src="{{($adminData->pic != '')? asset('backend/assets/admin/'.$adminData->pic) : asset('backend/assets/admin/admin.png')}}" alt="">
                             <div class="col-sm-9 text-secondary">
-                                <input type="file" class="form-control" />
+                                <input type="file" name="pic" class="form-control" />
                             </div>
                         </div>
                         <div class="row">

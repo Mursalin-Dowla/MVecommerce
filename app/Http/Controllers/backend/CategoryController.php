@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
 use Image;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
@@ -74,7 +75,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        return view('admin.pages.category.edit',compact('category'));
     }
 
     /**
@@ -86,7 +88,27 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $findCategory = Category::find($id);
+        if($request->cat_image){
+            if(File::exists(public_path("uploads/category/".$findCategory->cat_image))){
+                File::delete(public_path("uploads/category/".$findCategory->cat_image));
+                $image = $request->file('cat_image');
+                $customName = rand().".".$image->getClientOriginalExtension();
+                $location = public_path("uploads/category/".$customName);
+                Image::make($image)->resize(120, 120)->save($location);
+                $findCategory->cat_image = $customName;
+            }
+            else{
+                $image = $request->file('cat_image');
+                $customName = rand().".".$image->getClientOriginalExtension();
+                $location = public_path("uploads/category/".$customName);
+                Image::make($image)->resize(120, 120)->save($location);
+                $findCategory->cat_image = $customName;
+            }
+        }
+        $findCategory->cat_name = $request->cat_name;
+        $findCategory->update();
+        return redirect()->route('show.category')->with('successmessage','Category Updated successfully'); 
     }
 
     /**
@@ -97,6 +119,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $findCategory = Category::find($id);
+        $findCategory->delete();
+        return back()->with('successmessage','Category Deleted successfully'); 
     }
 }
