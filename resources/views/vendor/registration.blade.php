@@ -67,9 +67,9 @@
 												</div>
 											</div>													
 											<div class="col-12">
-												<label for="inputChoosePassword" class="form-label">Password</label>
+												<label for="inputChoosePassword" class="form-label">Confirm Password</label>
 												<div class="input-group" id="show_hide_password">
-													<input name="password_confirmation" type="password" class="form-control border-end-0" id="inputChoosePassword" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
+													<input name="password_confirmation" type="password" class="form-control border-end-0" id="inputChoosePassword" placeholder="Enter Password Again"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
 												</div>
 											</div>													
 											<div class="col-12">

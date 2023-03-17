@@ -8,7 +8,7 @@
             <ol class="breadcrumb mb-0 p-0">
                 <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">vendor Profilep</li>
+                <li class="breadcrumb-item active" aria-current="page">vendor Profile</li>
             </ol>
         </nav>
     </div>
@@ -59,12 +59,14 @@
             <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
+                        <form action="{{route('vendor.updateprofile')}}" method="post" enctype="multipart/form-data">   
+                            @csrf                    
                         <div class="row mb-3">
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Full Name</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" value="{{$vendorData->name}}" />
+                                <input type="text" name="name" class="form-control" value="{{$vendorData->name}}" />
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -72,7 +74,7 @@
                                 <h6 class="mb-0">User Name</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" value="{{$vendorData->username}}" />
+                                <input type="text" name="username" class="form-control" value="{{$vendorData->username}}" />
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -80,7 +82,7 @@
                                 <h6 class="mb-0">Email</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" value="{{$vendorData->email}}" />
+                                <input type="text" name="email" class="form-control" value="{{$vendorData->email}}" />
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -88,7 +90,7 @@
                                 <h6 class="mb-0">Phone</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" value="{{$vendorData->phone}}" />
+                                <input type="text" name="phone" class="form-control" value="{{$vendorData->phone}}" />
                             </div>
                         </div>
         
@@ -97,7 +99,7 @@
                                 <h6 class="mb-0">Address</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" value="{{$vendorData->address}}" />
+                                <input type="text" name="address" class="form-control" value="{{$vendorData->address}}" />
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -106,15 +108,16 @@
                             </div>
                             <img class="w-25 border" height="150px"  src="{{($vendorData->pic != '')? asset('backend/assets/vendor/'.$vendorData->pic) : asset('backend/assets/vendor/vendor.png')}}" alt="">
                             <div class="col-sm-9 text-secondary">
-                                <input type="file" class="form-control" />
+                                <input type="file" name="pic" class="form-control" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-3"></div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="button" class="btn btn-primary px-4" value="Save Changes" />
+                                <button type="submit" class="btn btn-primary px-4">Save Changes</button>
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div>
                 <div class="row">

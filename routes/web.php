@@ -73,12 +73,14 @@ Route::middleware('auth','role:admin')->group(function(){
 
 // For Vendor Before Login
 Route::get('vendor/login',[VendorController::class,'login'])->name('vendor.login');
+Route::get('vendor/registration',[VendorController::class,'registration'])->name('vendor.registration');
 // For Vendor After Login
 Route::middleware('auth','role:vendor')->group(function(){
     Route::get('vendor/dashboard',[VendorController::class,'dashboard'])->name('vendor.dashboard');
     Route::get('vendor/profile',[VendorController::class,'profile'])->name('vendor.profile');
     Route::get('vendor/changepassword',[VendorController::class,'changepassword'])->name('vendor.changepassword');
     Route::post('vendor/updatepassword',[VendorController::class,'updatepassword'])->name('vendor.updatepassword');
+    Route::post('vendor/updateprofile',[VendorController::class,'updateprofile'])->name('vendor.updateprofile');
 });
 
 
