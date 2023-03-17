@@ -56,6 +56,7 @@
 												<label for="inpuName" class="form-label">Name</label>
 												<input name="name" type="text" class="form-control" id="inputName" placeholder="Name">
 											</div>
+											<input type="hidden" name="role" value="vendor">
 											<div class="col-12">
 												<label for="inputEmailAddress" class="form-label">Email Address</label>
 												<input name="email" type="email" class="form-control" id="inputEmailAddress" placeholder="example@user.com">

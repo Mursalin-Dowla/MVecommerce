@@ -49,6 +49,7 @@ class AdminController extends Controller
      }
      $findUser->email = $request->email;
      $findUser->username = $request->username;
+     $findUser->name = $request->name;
      $findUser->phone = $request->phone;
      $findUser->address = $request->address;
      $findUser->update();

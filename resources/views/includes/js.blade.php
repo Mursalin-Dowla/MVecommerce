@@ -20,3 +20,25 @@
     <!-- Template  JS -->
     <script src="{{asset('frontend')}}/assets/js/main.js?v=5.3"></script>
     <script src="{{asset('frontend')}}/assets/js/shop.js?v=5.3"></script>
+
+    {{-- toastr --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+    @if (Session::has('errormessage'))
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.warning("{{ session('errormessage') }}");
+    @endif
+    @if (Session::has('successmessage'))
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.success("{{ session('successmessage') }}");
+    @endif
+    $(function() {
+        $(".knob").knob();
+    });
+</script>

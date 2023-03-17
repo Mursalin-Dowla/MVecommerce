@@ -87,8 +87,8 @@ Route::middleware('auth','role:vendor')->group(function(){
 // For User Before Login
 Route::get('user/login',[]);
 // For User After Login
-// Route::middleware('auth')->group(function(){
-//     Route::get('user/dashboard',[])->name('user.dashboard');
-// });
+Route::middleware('auth','role:user')->group(function(){
+    Route::post('user/updateprofile',[FrontendController::class,'updateprofile'])->name('user.updateprofile');
+});
 
 require __DIR__.'/auth.php';

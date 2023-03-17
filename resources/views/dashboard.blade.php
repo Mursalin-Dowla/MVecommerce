@@ -198,14 +198,15 @@
                                             </div>
                                             <div class="card-body">
                                                 <p>Already have an account? <a href="page-login.html">Log in instead!</a></p>
-                                                <form method="post" name="enq">
+                                                <form action="{{route('user.updateprofile')}}" method="post" enctype="multipart/form-data" name="enq">
+                                                    @csrf
                                                     <div class="row">
                                                         <div class="form-group col-md-6">
                                                             <label>Name <span class="required">*</span></label>
                                                             <input required="" value="{{$userData->name}}" class="form-control" name="name" type="text" />
                                                         </div>                                
                                                         <div class="form-group col-md-12">
-                                                            <label>User Name <span class="required">*</span></label>
+                                                            <label>User Name</label>
                                                             <input required="" value="{{$userData->username}}" class="form-control" name="username" type="text" />
                                                         </div>
                                                         <div class="form-group col-md-12">
@@ -213,6 +214,19 @@
                                                             <input required="" value="{{$userData->email}}" class="form-control" name="email" type="email" />
                                                         </div>
                                                         <div class="form-group col-md-12">
+                                                            <label>Phone</label>
+                                                            <input type="text" name="phone" class="form-control" value="{{$userData->phone}}" />
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <label>Address <span class="required">*</span></label>
+                                                            <input type="text" name="address" class="form-control" value="{{$userData->address}}" />
+                                                        </div>
+                                                        <div class="form-group col-md-12">                                                           
+                                                            <label>Profile Picture</label>                                                            
+                                                            <img class="w-25 border" height="150px"  src="{{($userData->pic != '')? asset('backend/assets/user/'.$userData->pic) : asset('backend/assets/user/user.png')}}" alt="">                                                           
+                                                            <input type="file" name="pic" class="form-control" />                                                            
+                                                        </div>
+                                                        {{-- <div class="form-group col-md-12">
                                                             <label>Current Password <span class="required">*</span></label>
                                                             <input required="" class="form-control" name="password" type="password" />
                                                         </div>
@@ -223,7 +237,7 @@
                                                         <div class="form-group col-md-12">
                                                             <label>Confirm Password <span class="required">*</span></label>
                                                             <input required="" class="form-control" name="cpassword" type="password" />
-                                                        </div>
+                                                        </div> --}}
                                                         <div class="col-md-12">
                                                             <button type="submit" class="btn btn-fill-out submit font-weight-bold" name="submit" value="Submit">Save Change</button>
                                                         </div>
