@@ -107,6 +107,7 @@ class CategoryController extends Controller
             }
         }
         $findCategory->cat_name = $request->cat_name;
+        $findCategory->cat_slug = Str::slug($request->cat_name);
         $findCategory->update();
         return redirect()->route('show.category')->with('successmessage','Category Updated successfully'); 
     }
@@ -120,6 +121,9 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $findCategory = Category::find($id);
+        if(File::exists(public_path("uploads/category/".$findCategory->cat_image))){
+            File::delete(public_path("uploads/category/".$findCategory->cat_image));
+        }
         $findCategory->delete();
         return back()->with('successmessage','Category Deleted successfully'); 
     }

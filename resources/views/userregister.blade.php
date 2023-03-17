@@ -48,7 +48,11 @@
                                             <h1 class="mb-5">Create an Account</h1>
                                             <p class="mb-30">Already have an account? <a href="page-login.html">Login</a></p>
                                         </div>
-                                        <form method="post">
+                                        <form method="POST" action="{{ route('storeuser') }}">
+                                            @csrf
+                                            <div class="form-group">
+                                                <input type="text" required="" name="name" placeholder="Name" />
+                                            </div>
                                             <div class="form-group">
                                                 <input type="text" required="" name="username" placeholder="Username" />
                                             </div>
@@ -61,7 +65,7 @@
                                             <div class="form-group">
                                                 <input required="" type="password" name="password" placeholder="Confirm password" />
                                             </div>
-                                            <div class="login_footer form-group">
+                                            {{-- <div class="login_footer form-group">
                                                 <div class="chek-form">
                                                     <input type="text" required="" name="email" placeholder="Security code *" />
                                                 </div>
@@ -71,8 +75,8 @@
                                                     <b class="text-sale">7</b>
                                                     <b class="text-best">5</b>
                                                 </span>
-                                            </div>
-                                            <div class="payment_option mb-50">
+                                            </div> --}}
+                                            {{-- <div class="payment_option mb-50">
                                                 <div class="custome-radio">
                                                     <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios3" checked="" />
                                                     <label class="form-check-label" for="exampleRadios3" data-bs-toggle="collapse" data-target="#bankTranfer" aria-controls="bankTranfer">I am a customer</label>
@@ -81,8 +85,8 @@
                                                     <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios4" checked="" />
                                                     <label class="form-check-label" for="exampleRadios4" data-bs-toggle="collapse" data-target="#checkPayment" aria-controls="checkPayment">I am a vendor</label>
                                                 </div>
-                                            </div>
-                                            <div class="login_footer form-group mb-50">
+                                            </div> --}}
+                                            {{-- <div class="login_footer form-group mb-50">
                                                 <div class="chek-form">
                                                     <div class="custome-checkbox">
                                                         <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox12" value="" />
@@ -90,7 +94,7 @@
                                                     </div>
                                                 </div>
                                                 <a href="page-privacy-policy.html"><i class="fi-rs-book-alt mr-5 text-muted"></i>Lean more</a>
-                                            </div>
+                                            </div> --}}
                                             <div class="form-group mb-30">
                                                 <button type="submit" class="btn btn-fill-out btn-block hover-up font-weight-bold" name="login">Submit &amp; Register</button>
                                             </div>

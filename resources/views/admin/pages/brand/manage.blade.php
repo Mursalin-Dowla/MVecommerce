@@ -39,8 +39,8 @@
                                     <img height="80px" width="80px" src="{{asset('uploads/brand/'.$brand->brand_image)}}" alt="Brand Image">
                                 </td>
                                 <td>
-                                    <button class="btn btn-sm btn-info">Edit</button>
-                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                    <a href="{{route('edit.brand',$brand->id)}}" class="btn btn-sm btn-info">Edit</a>
+                                    <a href="{{route('delete.brand',$brand->id)}}" class="btn btn-sm btn-danger">Delete</a>
                                 </td>
                             </tr>
                         @endforeach               
