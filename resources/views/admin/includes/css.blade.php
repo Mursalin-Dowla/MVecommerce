@@ -17,5 +17,5 @@
 <link rel="stylesheet" href="{{asset('backend')}}/assets/css/semi-dark.css" />
 <link rel="stylesheet" href="{{asset('backend')}}/assets/css/header-colors.css" />
 {{-- Toastr --}}
-<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<link href="{{ asset('backend') }}/assets/plugins/input-tags/css/tagsinput.css" rel="stylesheet" />

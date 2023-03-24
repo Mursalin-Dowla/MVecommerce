@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Frontend\FrontendController;
 
 
@@ -21,10 +22,7 @@ use App\Http\Controllers\Frontend\FrontendController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [FrontendController::class,'home']);
 Route::get('/dashboard', [FrontendController::class,'dashboard'])->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -67,6 +65,14 @@ Route::middleware('auth','role:admin')->group(function(){
         Route::get('/edit/{id}',[BrandController::class,'edit'])->name('edit.brand');
         Route::post('/update/{id}',[BrandController::class,'update'])->name('update.brand');
         Route::get('/delete/{id}',[BrandController::class,'destroy'])->name('delete.brand');
+    });
+    Route::group(['prefix' => 'admin/product'], function(){
+        Route::get('/add',[ProductController::class,'index'])->name('add.product');
+        Route::post('/store',[ProductController::class,'store'])->name('store.product');
+        Route::get('/show',[ProductController::class,'show'])->name('show.product');
+        Route::get('/edit/{id}',[ProductController::class,'edit'])->name('edit.product');
+        Route::post('/update/{id}',[ProductController::class,'update'])->name('update.product');
+        Route::get('/delete/{id}',[ProductController::class,'destroy'])->name('delete.product');
     });
 });
 

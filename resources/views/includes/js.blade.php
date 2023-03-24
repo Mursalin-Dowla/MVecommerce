@@ -20,6 +20,7 @@
     <!-- Template  JS -->
     <script src="{{asset('frontend')}}/assets/js/main.js?v=5.3"></script>
     <script src="{{asset('frontend')}}/assets/js/shop.js?v=5.3"></script>
+    <script src="{{asset('frontend')}}/assets/js/ajax.js"></script>
 
     {{-- toastr --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>

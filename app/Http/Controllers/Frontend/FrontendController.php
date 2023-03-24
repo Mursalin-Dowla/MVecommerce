@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\ProductGallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
-use Image;
+use Intervention\Image\Facades\Image;
 
 class FrontendController extends Controller
 {
@@ -42,5 +45,15 @@ class FrontendController extends Controller
      $findUser->address = $request->address;
      $findUser->update();
      return redirect()->route('dashboard')->with('successmessage','Profile Updated successfully'); 
+    }
+    function home(){
+     $allProducts = Product::all();
+     $FeaturedProducts = Product::where('featured','Featured')->get();
+     $cats = Category::all();
+     $vendors = User::where('role','vendor')->get();
+     return view('welcome',compact('cats','allProducts','FeaturedProducts','vendors'));
+    }
+    static function gallery($id){
+     return ProductGallery::where('product_id',$id)->get();
     }
 }

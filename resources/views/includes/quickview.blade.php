@@ -1,5 +1,6 @@
- <!-- Quick view -->
- <div class="modal fade custom-modal" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
+@foreach ($FeaturedProducts as $FeaturedProduct)
+     <!-- Quick view -->
+ <div class="modal fade custom-modal" id="quickViewModal{{$FeaturedProduct->id}}" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -10,37 +11,23 @@
                             <span class="zoom-icon"><i class="fi-rs-search"></i></span>
                             <!-- MAIN SLIDES -->
                             <div class="product-image-slider">
+                                @php
+                                $images = App\Http\Controllers\Frontend\FrontendController::gallery($FeaturedProduct->id);
+                               @endphp
+                               @foreach ($images as $image)    
                                 <figure class="border-radius-10">
-                                    <img src="{{asset('frontend')}}/assets/imgs/shop/product-16-2.jpg" alt="product image" />
-                                </figure>
-                                <figure class="border-radius-10">
-                                    <img src="{{asset('frontend')}}/assets/imgs/shop/product-16-1.jpg" alt="product image" />
-                                </figure>
-                                <figure class="border-radius-10">
-                                    <img src="{{asset('frontend')}}/assets/imgs/shop/product-16-3.jpg" alt="product image" />
-                                </figure>
-                                <figure class="border-radius-10">
-                                    <img src="{{asset('frontend')}}/assets/imgs/shop/product-16-4.jpg" alt="product image" />
-                                </figure>
-                                <figure class="border-radius-10">
-                                    <img src="{{asset('frontend')}}/assets/imgs/shop/product-16-5.jpg" alt="product image" />
-                                </figure>
-                                <figure class="border-radius-10">
-                                    <img src="{{asset('frontend')}}/assets/imgs/shop/product-16-6.jpg" alt="product image" />
-                                </figure>
-                                <figure class="border-radius-10">
-                                    <img src="{{asset('frontend')}}/assets/imgs/shop/product-16-7.jpg" alt="product image" />
-                                </figure>
+                                    <img src="{{asset('uploads/product/gallery/'.$image->images)}}" alt="product image" />
+                                </figure> 
+                                @endforeach                             
                             </div>
                             <!-- THUMBNAILS -->
+                            @php
+                                $images = App\Http\Controllers\Frontend\FrontendController::gallery($FeaturedProduct->id);
+                            @endphp
                             <div class="slider-nav-thumbnails">
-                                <div><img src="{{asset('frontend')}}/assets/imgs/shop/thumbnail-3.jpg" alt="product image" /></div>
-                                <div><img src="{{asset('frontend')}}/assets/imgs/shop/thumbnail-4.jpg" alt="product image" /></div>
-                                <div><img src="{{asset('frontend')}}/assets/imgs/shop/thumbnail-5.jpg" alt="product image" /></div>
-                                <div><img src="{{asset('frontend')}}/assets/imgs/shop/thumbnail-6.jpg" alt="product image" /></div>
-                                <div><img src="{{asset('frontend')}}/assets/imgs/shop/thumbnail-7.jpg" alt="product image" /></div>
-                                <div><img src="{{asset('frontend')}}/assets/imgs/shop/thumbnail-8.jpg" alt="product image" /></div>
-                                <div><img src="{{asset('frontend')}}/assets/imgs/shop/thumbnail-9.jpg" alt="product image" /></div>
+                                @foreach ($images as $image)                                    
+                                <div><img src="{{asset('uploads/product/gallery/'.$image->images)}}" alt="product image" /></div>                    
+                                @endforeach
                             </div>
                         </div>
                         <!-- End Gallery -->
@@ -48,7 +35,7 @@
                     <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="detail-info pr-30 pl-30">
                             <span class="stock-status out-stock"> Sale Off </span>
-                            <h3 class="title-detail"><a href="shop-product-right.html" class="text-heading">Seeds of Change Organic Quinoa, Brown</a></h3>
+                            <h3 class="title-detail"><a href="shop-product-right.html" class="text-heading">{{$FeaturedProduct->product_name}}</a></h3>
                             <div class="product-detail-rating">
                                 <div class="product-rate-cover text-end">
                                     <div class="product-rate d-inline-block">
@@ -59,10 +46,13 @@
                             </div>
                             <div class="clearfix product-price-cover">
                                 <div class="product-price primary-color float-left">
-                                    <span class="current-price text-brand">$38</span>
+                                    <span class="current-price text-brand">{{$FeaturedProduct->selling_price}}</span>
                                     <span>
-                                        <span class="save-price font-md color3 ml-15">26% Off</span>
-                                        <span class="old-price font-md ml-15">$52</span>
+                                        <span class="save-price font-md color3 ml-15">{{$FeaturedProduct->discount_price}}</span>
+                                        <?php
+                                        $oldPrice = $FeaturedProduct->selling_price + $FeaturedProduct->discount_price;
+                                        ?>
+                                        <span class="old-price font-md ml-15">{{ $oldPrice}}</span>
                                     </span>
                                 </div>
                             </div>
@@ -78,7 +68,15 @@
                             </div>
                             <div class="font-xs">
                                 <ul>
-                                    <li class="mb-5">Vendor: <span class="text-brand">Nest</span></li>
+                                    <?php 
+                                            $id = $FeaturedProduct->vendor_id;
+                                            foreach ($vendors as $vendor) {
+                                                if ($vendor->id == $id) {
+                                                    $vendorName = $vendor->name;
+                                                };
+                                            }
+                                                ?>
+                                    <li class="mb-5">Vendor: <span class="text-brand">{{$vendorName}}</span></li>
                                     <li class="mb-5">MFG:<span class="text-brand"> Jun 4.2022</span></li>
                                 </ul>
                             </div>
@@ -90,3 +88,4 @@
         </div>
     </div>
 </div>
+@endforeach

@@ -15,6 +15,7 @@
 <script src="{{ asset('backend') }}/assets/plugins/jquery-knob/jquery.knob.js"></script>
 {{-- toastr --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="{{ asset('backend') }}/assets/plugins/input-tags/js/tagsinput.js"></script> 
 <script>
     @if (Session::has('errormessage'))
         toastr.options = {
@@ -37,3 +38,19 @@
 <script src="{{ asset('backend') }}/assets/js/index.js"></script>
 <!--app JS-->
 <script src="{{ asset('backend') }}/assets/js/app.js"></script>
+<script src='https://cdn.tiny.cloud/1/vdqx2klew412up5bcbpwivg1th6nrh3murc6maz8bukgos4v/tinymce/5/tinymce.min.js' referrerpolicy="origin">
+</script>
+<script>
+    tinymce.init({
+      selector: '#long_des'
+    });
+    function preImage(inputVal){
+        if (inputVal.files && inputVal.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#imageView').attr('src',e.target.result);
+            }
+            reader.readAsDataURL(inputVal.files[0]);
+        }
+    }
+</script>
