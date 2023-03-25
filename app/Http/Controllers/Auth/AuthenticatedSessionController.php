@@ -9,6 +9,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Models\User;
+use App\Models\Category;
+use App\Models\Product;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -17,7 +20,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('userlogin');
+        $allProducts = Product::all();
+        $FeaturedProducts = Product::where('featured', 'Featured')->get();
+        $cats = Category::all();
+        $vendors = User::where('role', 'vendor')->get();
+        return view('userlogin', compact('cats', 'allProducts', 'FeaturedProducts', 'vendors'));
     }
 
     /**
@@ -30,18 +37,20 @@ class AuthenticatedSessionController extends Controller
             'password' => 'required',
             // 'security' => 'same:randcode',
         ]);
-        
+
         $request->authenticate();
         $request->session()->regenerate();
-        if($request->user()->role === "admin"){
+        if ($request->user()->role === "admin") {
             return redirect()->intended("admin/dashboard");
-        }elseif($request->user()->role === "vendor"){
+        } elseif ($request->user()->role === "vendor") {
             return redirect()->intended("vendor/dashboard");
-        }else{
+        } else {
+            $allProducts = Product::all();
+            $FeaturedProducts = Product::where('featured', 'Featured')->get();
+            $cats = Category::all();
+            $vendors = User::where('role', 'vendor')->get();
             return redirect()->intended("dashboard");
         }
-
-        
     }
 
     /**

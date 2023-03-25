@@ -78,8 +78,7 @@
                                             </div>
                                             <span class="font-xs text-heading"> Sold: 90/120</span>
                                         </div>
-                                        <a href="shop-cart.html" class="btn w-100 hover-up"><i
-                                                class="fi-rs-shopping-cart mr-5"></i>Add To Cart</a>
+                                        <button value="{{$FeaturedProduct->id}}" type="submit" class="qck_vw_atcart button button-add-to-cart"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
                                     </div>
                                 </div>
                                 @endforeach                              

@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
     <head>
-        <meta charset="utf-8" />
-        <title>Nest - Multipurpose eCommerce HTML Template</title>
+        
         @include('includes.meta')
         <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="{{asset('frontend')}}/assets/imgs/theme/favicon.svg" />
+        <link rel="shortcut icon" type="image/x-icon" href="{{asset('uploads/siteimage/'.$seo->favicon)}}" />
         <!-- Template CSS -->
         @include('includes.css')
     </head>

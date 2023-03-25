@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\SeoSettingsController;
 use App\Http\Controllers\Frontend\FrontendController;
 
 
@@ -74,6 +75,14 @@ Route::middleware('auth','role:admin')->group(function(){
         Route::post('/update/{id}',[ProductController::class,'update'])->name('update.product');
         Route::get('/delete/{id}',[ProductController::class,'destroy'])->name('delete.product');
     });
+    Route::group(['prefix' => 'admin/seo'], function(){
+        Route::get('/add',[SeoSettingsController::class,'index'])->name('add.seo');
+        Route::post('/store',[SeoSettingsController::class,'store'])->name('store.seo');
+        Route::get('/show',[SeoSettingsController::class,'show'])->name('show.seo');
+        Route::get('/edit/{id}',[SeoSettingsController::class,'edit'])->name('edit.seo');
+        Route::post('/update/{id}',[SeoSettingsController::class,'update'])->name('update.seo');
+        Route::get('/delete/{id}',[SeoSettingsController::class,'destroy'])->name('delete.seo');
+    });
 });
 
 
@@ -93,8 +102,17 @@ Route::middleware('auth','role:vendor')->group(function(){
 // For User Before Login
 Route::get('user/login',[]);
 // For User After Login
-Route::middleware('auth','role:user')->group(function(){
+Route::middleware('auth')->group(function(){
     Route::post('user/updateprofile',[FrontendController::class,'updateprofile'])->name('user.updateprofile');
+
+    // For Cart
+    Route::get('/addtocart/{id}',[FrontendController::class,'addtocart'])->name('addtocart');
+    Route::get('/showcart',[FrontendController::class,'showcart'])->name('showcart');
+    Route::get('/deleteItem/{id}',[FrontendController::class,'deleteItem'])->name('deleteItem');
+    Route::get('/viewcart',[FrontendController::class,'viewcart'])->name('viewcart');
+    Route::get('/qntup/{id}',[FrontendController::class,'qntup'])->name('qntup');
+    Route::get('/qntdown/{id}',[FrontendController::class,'qntdown'])->name('qntdown');
+    Route::get('/deleteCartItem/{id}',[FrontendController::class,'deleteCartItem'])->name('deleteCartItem');
 });
 
 require __DIR__.'/auth.php';
