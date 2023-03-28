@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SeoSettingsController;
+use App\Http\Controllers\Frontend\ApiTestController;
 use App\Http\Controllers\Frontend\FrontendController;
 
 
@@ -114,5 +115,10 @@ Route::middleware('auth')->group(function(){
     Route::get('/qntdown/{id}',[FrontendController::class,'qntdown'])->name('qntdown');
     Route::get('/deleteCartItem/{id}',[FrontendController::class,'deleteCartItem'])->name('deleteCartItem');
 });
+
+// Api test
+
+Route::get('/apitest',[ApiTestController::class, 'index']);
+Route::post('/apitest/store',[ApiTestController::class, 'store']);
 
 require __DIR__.'/auth.php';
